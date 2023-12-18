@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Menu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="path/to/font-awesome.js"></script>
+    <script>
+        function ToggleMenu(show) {
+            var menu = document.querySelector('.all');
+            if (show) {
+                menu.classList.remove('hidden');
+                console.log("Menu shown");
+            } else {
+                menu.classList.add('hidden');
+                console.log("Menu hidden");
+            }
+        }
+// Function to send a message to Lua client
+function sendToLua(action) {
+    fetch(`https://${GetParentResourceName()}/action`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({ action: action })
+    }).then(() => {
+        console.log(`Action '${action}' sent to Lua client`);
+    }).catch(err => {
+        console.error("Error sending action to Lua client:", err);
+    });
+}
+
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('message', function(event) {
+                var item = event.data;
+                if (item.type === "ui") {
+                    ToggleMenu(item.status);
+                }
+            });
+
+            document.querySelectorAll('.all div').forEach(div => {
+                div.addEventListener('click', function() {
+                    const action = this.querySelector('.text').textContent.toLowerCase().replace(/\s/g, '');
+                    console.log(`Div clicked: ${action}`);
+                    sendToLua(action);
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === "Escape") {
+                    console.log("Escape key pressed");
+                    closeMenu();
+                }
+            });
+        });
+
+        function closeMenu() {
+            fetch(`https://${GetParentResourceName()}/exit`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+                body: JSON.stringify({})
+            }).then(() => {
+                console.log("Menu closed");
+            }).catch(err => {
+                console.error("Error closing menu:", err);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="all hidden">
+        <div class="lefter">
+            <div class="text">job</div>
+          </div>
+          <div class="left">
+            <div class="text">bank</div>
+          </div>
+          <div class="center">
+            <div class="explainer"><span>Info</span></div>
+            <div class="text">cash</div>
+            </div>
+          <div class="right">
+            <div class="text">gang</div>
+          </div>
+          <div class="righter">
+            <div class="text">id</div>
+          </div>
+    </div>
+    <a href="https://jouanmarcel.com" target="_blank" class="ref">🔗 Jouan Marcel</a>
+    <script src="js.js"></script>
+</body>
+
+</html>
