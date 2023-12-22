@@ -1,0 +1,45 @@
+local Translations = {
+    notify = {
+        ydhk = 'Du har ikke nøgler til dette køretøj.',
+        nonear = 'Der er ingen i nærheden at give nøgler til',
+        vlock = 'Køretøjet er låst!',
+        vunlock = 'Køretøjet er låst op!',
+        vlockpick = 'Du formåede at låse døren op med en låsepind!',
+        fvlockpick = 'Du kan ikke finde nøglerne og bliver frustreret.',
+        vgkeys = 'Du giver nøglerne videre.',
+        vgetkeys = 'Du får nøgler til køretøjet!',
+        fpid = 'Udfyld spillerens ID og nummerpladeargumenter',
+        cjackfail = 'Biltyveri mislykkedes!',
+        vehclose = 'Der er ingen nærliggende køretøj!',
+    },
+    progress = {
+        takekeys = 'Tager nøgler fra kroppen...',
+        hskeys = 'Søger efter bilnøglerne...',
+        acjack = 'Forsøger biltyveri...',
+    },
+    info = {
+        skeys = '~g~[H]~w~ - Søg efter nøgler',
+        tlock = 'Skift køretøjslås',
+        palert = 'Biltyveri i gang. Type: ',
+        engine = 'Skift motorstatus',
+    },
+    addcom = {
+        givekeys = 'Giv nøglerne til nogen. Hvis ingen ID angivet, gives til nærmeste person eller alle i køretøjet.',
+        givekeys_id = 'id',
+        givekeys_id_help = 'Spiller ID',
+        addkeys = 'Tilføj nøgler til et køretøj til nogen.',
+        addkeys_id = 'id',
+        addkeys_id_help = 'Spiller ID',
+        addkeys_plate = 'nummerplade',
+        addkeys_plate_help = 'Nummerplade',
+        rkeys = 'Fjern nøgler til et køretøj fra nogen.',
+        rkeys_id = 'id',
+        rkeys_id_help = 'Spiller ID',
+        rkeys_plate = 'nummerplade',
+        rkeys_plate_help = 'Nummerplade',
+    }
+}
+Lang = Lang or Locale:new({
+    phrases = Translations,
+    warnOnMissing = true
+})
